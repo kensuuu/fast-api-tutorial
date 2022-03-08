@@ -1,16 +1,10 @@
-from datetime import datetime
-from typing import Optional, List
+from typing import List
 
 from fastapi import APIRouter
-from pydantic import BaseModel
+
+from models.task import Task
 
 router = APIRouter()
-
-class Task(BaseModel):
-    id: int
-    title: str
-    text: Optional[str] = None
-    timestamp: datetime
 
 @router.get("/tasks", response_model=List[Task], status_code=200, tags=["tasks"])
 async def get_tasks(user_id: int):
