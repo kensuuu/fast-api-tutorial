@@ -6,9 +6,9 @@ from models.task import Task
 
 router = APIRouter()
 
-@router.get("/tasks", response_model=List[Task], status_code=200, tags=["tasks"])
+@router.get("/tasks", status_code=200, tags=["tasks"])
 async def get_tasks(user_id: int):
-    return List[Task]
+    return {"message": "TODO LIST"}
 
 @router.post("/tasks", status_code=201, tags=["tasks"])
 async def create_task(task: Task):
