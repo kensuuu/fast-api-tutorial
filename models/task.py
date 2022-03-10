@@ -1,10 +1,28 @@
-from datetime import datetime
-from typing import Optional
+from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy.dialects.mysql import TIMESTAMP
+from database import Base
 
-from pydantic import BaseModel
+class Task(Base):
+    __tablename__ = "tasks"
 
-class Task(BaseModel):
-    id: int
-    title: str
-    text: Optional[str] = None
-    timestamp: datetime
+    id: Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    title: Column(
+        String(128),
+        nullable=False
+    )
+
+    text: Column(
+        Text,
+        nullable=True
+    )
+
+    created_at: Column(
+        TIMESTAMP,
+        nullable=False,
+        server_default=text('current_timestamp')
+    )
